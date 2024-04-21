@@ -9,14 +9,14 @@ const getAuthConfig = async () => {
     if (!accessToken) {
         throw new Error();
     }
-    return{
+    return {
         headers: {
             Authorization: `Bearer ${accessToken}`
         }
     }
 }
 
-export async function putCartItem(pid: number, quantity: number):Promise<void> {
+export async function putCartItem(pid: number, quantity: number): Promise<void> {
     try {
         await axios.put(
             `${baseUrl}/cart/${pid}/${quantity}`,
@@ -29,12 +29,12 @@ export async function putCartItem(pid: number, quantity: number):Promise<void> {
     }
 }
 
-export async function getCartItems():Promise<GetAllCartItemDto[]> {
+export async function getCartItems(): Promise<GetAllCartItemDto[]> {
     try {
         const response = await axios.get<GetAllCartItemDto[]>(
             `${baseUrl}/cart`,
             await getAuthConfig()
-            );
+        );
         return response.data;
     } catch (error) {
         console.error(error);
@@ -56,21 +56,13 @@ export async function patchCartItemQuantity(pid: number, quantity: number) {
     }
 }
 
-export async function deleteCartItem(pid:number){
-    const accessToken = await FirebaseAuthService.getAccessToken();
-    if (!accessToken) {
-        throw new Error();
-    }
+export async function deleteCartItem(pid: number) {
     try {
         await axios.delete(
             `${baseUrl}/cart/${pid}`,
-            {
-                headers:{
-                    Authorization: `Bearer ${accessToken}`,
-                }
-            }
+            await getAuthConfig()
         )
-    }catch (error){
+    } catch (error) {
         console.error(error);
         throw error;
     }

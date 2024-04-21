@@ -10,35 +10,62 @@ import QuantitySelector from "../../../component/QuantitySelector.tsx";
 import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded';
 import IconButton from "@mui/material/IconButton";
 import * as CartItemApi from "../../../../api/CartItemApi.ts";
-import {Dispatch, SetStateAction} from "react";
+import {Dispatch, SetStateAction, useState} from "react";
+import {useNavigate} from "react-router-dom";
+import {CircularProgress} from "@mui/material";
 
 type Props = {
     dto: GetAllCartItemDto;
     cartItemDtoList: GetAllCartItemDto[]
-    setDtoList:Dispatch<SetStateAction<GetAllCartItemDto[] | undefined>>
+    setDtoList: Dispatch<SetStateAction<GetAllCartItemDto[] | undefined>>
 }
 
-export default function CartItemDetails({dto,setDtoList,cartItemDtoList}: Props) {
-    const handlePlusOne = async () =>{
-        const response = await CartItemApi.patchCartItemQuantity(dto.pid,dto.cart_quantity+1);
-        const updatedDtoList = cartItemDtoList.map((value)=>{
-            if (value.pid === dto.pid){
-                value.cart_quantity = response.cart_quantity;
-            }
-            return value;
-        });
-        setDtoList(updatedDtoList);
+export default function CartItemDetails({dto, setDtoList, cartItemDtoList}: Props) {
+    const [isQuantityPatching, setIsQuantityPatching] = useState<boolean>(false);
+    const [isDeletingCart, setIsDeletingCart] = useState<boolean>(false);
+    const navigate = useNavigate();
+
+    const handlePlusOne = async () => {
+        if (dto.cart_quantity + 1 < dto.stock) {
+            setIsQuantityPatching(true)
+            const response = await CartItemApi.patchCartItemQuantity(dto.pid, dto.cart_quantity + 1);
+            const updatedDtoList = cartItemDtoList.map((value) => {
+                if (value.pid === dto.pid) {
+                    value.cart_quantity = response.cart_quantity;
+                }
+                return value;
+            });
+            setDtoList(updatedDtoList);
+            setIsQuantityPatching(false);
+        }
     }
 
-    const handleMinusOne = async () =>{
-        const response = await CartItemApi.patchCartItemQuantity(dto.pid,dto.cart_quantity-1);
-        const updatedDtoList = cartItemDtoList.map((value)=>{
-            if (value.pid === dto.pid){
-                value.cart_quantity = response.cart_quantity;
-            }
-            return value;
-        });
-        setDtoList(updatedDtoList);
+    const handleMinusOne = async () => {
+        if (dto.cart_quantity > 1) {
+            setIsQuantityPatching(true)
+            const response = await CartItemApi.patchCartItemQuantity(dto.pid, dto.cart_quantity - 1);
+            const updatedDtoList = cartItemDtoList.map((value) => {
+                if (value.pid === dto.pid) {
+                    value.cart_quantity = response.cart_quantity;
+                }
+                return value;
+            });
+            setDtoList(updatedDtoList);
+            setIsQuantityPatching(false)
+        }
+    }
+
+    const handleDelete = async () => {
+        try {
+            setIsDeletingCart(true);
+            await CartItemApi.deleteCartItem(dto.pid);
+            const updatedDtoList = cartItemDtoList.filter((value) => (
+                value.pid !== dto.pid
+            ));
+            setDtoList(updatedDtoList);
+        } catch (error) {
+            navigate("/error")
+        }
     }
 
     return (
@@ -65,10 +92,15 @@ export default function CartItemDetails({dto,setDtoList,cartItemDtoList}: Props)
                             quantity={dto.cart_quantity}
                             handleMinus={handleMinusOne}
                             handlePlus={handlePlusOne}
+                            isLoading={isQuantityPatching}
                         />
-                        <IconButton>
-                            <DeleteForeverRoundedIcon/>
-                        </IconButton>
+                        {
+                            isDeletingCart
+                                ? <CircularProgress size="1rem"/>
+                                : <IconButton color="error" onClick={handleDelete}>
+                                    <DeleteForeverRoundedIcon/>
+                                </IconButton>
+                        }
                     </CardActions>
                 </Card>
             </Paper>

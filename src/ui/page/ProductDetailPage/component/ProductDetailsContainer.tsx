@@ -49,7 +49,10 @@ export default function ProductDetailsContainer({productDetailDto}: Props) {
         if (productDetailDto.stock > 0){
             return <>
                 <Box>
-                    <QuantitySelector quantity={quantity} handleMinus={handleMinus} handlePlus={handlePlus}/>
+                    <QuantitySelector
+                        quantity={quantity}
+                        handleMinus={handleMinus}
+                        handlePlus={handlePlus}/>
                 </Box>
                 <Box mt={2} display="flex">
                     <Button
