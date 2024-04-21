@@ -1,0 +1,86 @@
+[
+  {
+    "pid": 1,
+    "name": "Oyster Perpetual Datejust 36腕錶白色黃金及蠔式鋼款，搭配薄荷綠色錶面及紀念型（Jubilee）錶帶。",
+    "price": 1288100.00,
+    "image_url": "https://media.rolex.com/image/upload/q_auto/f_auto/t_v7/c_limit,w_2440/v1/catalogue/2024/upright-c/m126234-0051",
+    "has_stock": true
+  },
+  {
+    "pid": 2,
+    "name": "Oyster Perpetual Datejust 36腕錶黃金及蠔式鋼款，搭配白色錶面及蠔式（Oyster）錶帶。",
+    "price": 1763300.00,
+    "image_url": "https://media.rolex.com/image/upload/q_auto/f_auto/t_v7/c_limit,w_2440/v1/catalogue/2024/upright-c/m126233-0030",
+    "has_stock": true
+  },
+  {
+    "pid": 3,
+    "name": "Oyster Perpetual Datejust 31腕錶18K永恒玫瑰金款，搭配鑲鑽玫瑰金色錶面及元首型（President）錶帶。",
+    "price": 6666000.00,
+    "image_url": "https://media.rolex.com/image/upload/q_auto/f_auto/t_v7/c_limit,w_2440/v1/catalogue/2024/upright-c/m278285rbr-0025",
+    "has_stock": true
+  },
+  {
+    "pid": 4,
+    "name": "Oyster Perpetual Datejust 41腕錶白色黃金及蠔式鋼款，搭配白色錶面及蠔式（Oyster）錶帶。",
+    "price": 1481700.00,
+    "image_url": "https://media.rolex.com/image/upload/q_auto/f_auto/t_v7/c_limit,w_2440/v1/catalogue/2024/upright-c/m126334-0023",
+    "has_stock": true
+  },
+  {
+    "pid": 5,
+    "name": "Oyster Perpetual Submariner腕錶蠔式鋼款，搭配黑色Cerachrom陶質字圈、黑色錶面及特大夜光鐘點標記。",
+    "price": 1318900.00,
+    "image_url": "https://media.rolex.com/image/upload/q_auto/f_auto/t_v7/c_limit,w_2440/v1/catalogue/2024/upright-c/m124060-0001",
+    "has_stock": true
+  },
+  {
+    "pid": 6,
+    "name": "Oyster Perpetual Submariner Date腕錶黃金及蠔式鋼款，搭配藍色Cerachrom陶質字圈、皇家藍色錶面及特大夜光鐘點標記。",
+    "price": 2266000.00,
+    "image_url": "https://media.rolex.com/image/upload/q_auto/f_auto/t_v7/c_limit,w_2440/v1/catalogue/2024/upright-c/m126613lb-0002",
+    "has_stock": true
+  },
+  {
+    "pid": 7,
+    "name": "Oyster Perpetual Submariner Date腕錶蠔式鋼款，搭配綠色Cerachrom陶質字圈、黑色錶面及特大夜光鐘點標記。",
+    "price": 1555400.00,
+    "image_url": "https://media.rolex.com/image/upload/q_auto/f_auto/t_v7/c_limit,w_2440/v1/catalogue/2024/upright-c/m126610lv-0002",
+    "has_stock": true
+  },
+  {
+    "pid": 8,
+    "name": "Oyster Perpetual Submariner Date腕錶18K黃金款，搭配黑色Cerachrom陶質字圈、黑色錶面及特大夜光鐘點標記。",
+    "price": 5615500.00,
+    "image_url": "https://media.rolex.com/image/upload/q_auto/f_auto/t_v7/c_limit,w_2440/v1/catalogue/2024/upright-c/m126618ln-0002",
+    "has_stock": true
+  },
+  {
+    "pid": 9,
+    "name": "Oyster Perpetual GMT-Master II腕錶蠔式鋼款，搭配黑色錶面及紀念型（Jubilee）錶帶。",
+    "price": 1569700.00,
+    "image_url": "https://media.rolex.com/image/upload/q_auto/f_auto/t_v7/c_limit,w_2440/v1/catalogue/2024/upright-c/m126710grnr-0003",
+    "has_stock": true
+  },
+  {
+    "pid": 10,
+    "name": "Oyster Perpetual GMT-Master II腕錶蠔式鋼款，搭配黑色錶面及蠔式（Oyster）錶帶。",
+    "price": 1614800.00,
+    "image_url": "https://media.rolex.com/image/upload/q_auto/f_auto/t_v7/c_limit,w_2440/v1/catalogue/2024/upright-c/m126720vtnr-0001",
+    "has_stock": true
+  },
+  {
+    "pid": 11,
+    "name": "Oyster Perpetual GMT-Master II腕錶永恒玫瑰金及蠔式鋼款，搭配黑色錶面及蠔式（Oyster）錶帶。",
+    "price": 2355100.00,
+    "image_url": "https://media.rolex.com/image/upload/q_auto/f_auto/t_v7/c_limit,w_2440/v1/catalogue/2024/upright-c/m126711chnr-0002",
+    "has_stock": true
+  },
+  {
+    "pid": 12,
+    "name": "Oyster Perpetual GMT-Master II腕錶18K白色黃金款，搭配午夜藍色錶面及蠔式（Oyster）錶帶。",
+    "price": 5852000.00,
+    "image_url": "https://media.rolex.com/image/upload/q_auto/f_auto/t_v7/c_limit,w_2440/v1/catalogue/2024/upright-c/m126719blro-0003",
+    "has_stock": true
+  }
+]
