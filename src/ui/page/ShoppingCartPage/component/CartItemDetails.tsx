@@ -12,7 +12,7 @@ import IconButton from "@mui/material/IconButton";
 import * as CartItemApi from "../../../../api/CartItemApi.ts";
 import {Dispatch, SetStateAction, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {CircularProgress} from "@mui/material";
+import DeleteConfirmDialog from "./DeleteConfirmDialog.tsx";
 
 type Props = {
     dto: GetAllCartItemDto;
@@ -22,8 +22,8 @@ type Props = {
 
 export default function CartItemDetails({dto, setDtoList, cartItemDtoList}: Props) {
     const [isQuantityPatching, setIsQuantityPatching] = useState<boolean>(false);
-    const [isDeletingCart, setIsDeletingCart] = useState<boolean>(false);
     const navigate = useNavigate();
+    const [isDeleteConfirm, setIsDeleteConfirm] = useState<boolean>(false);
 
     const handlePlusOne = async () => {
         if (dto.cart_quantity + 1 < dto.stock) {
@@ -41,7 +41,7 @@ export default function CartItemDetails({dto, setDtoList, cartItemDtoList}: Prop
     }
 
     const handleMinusOne = async () => {
-        if (dto.cart_quantity > 1) {
+        if (dto.cart_quantity -1 > 0) {
             setIsQuantityPatching(true)
             const response = await CartItemApi.patchCartItemQuantity(dto.pid, dto.cart_quantity - 1);
             const updatedDtoList = cartItemDtoList.map((value) => {
@@ -52,12 +52,13 @@ export default function CartItemDetails({dto, setDtoList, cartItemDtoList}: Prop
             });
             setDtoList(updatedDtoList);
             setIsQuantityPatching(false)
+        }else {
+            setIsDeleteConfirm(true)
         }
     }
 
     const handleDelete = async () => {
         try {
-            setIsDeletingCart(true);
             await CartItemApi.deleteCartItem(dto.pid);
             const updatedDtoList = cartItemDtoList.filter((value) => (
                 value.pid !== dto.pid
@@ -94,16 +95,13 @@ export default function CartItemDetails({dto, setDtoList, cartItemDtoList}: Prop
                             handlePlus={handlePlusOne}
                             isLoading={isQuantityPatching}
                         />
-                        {
-                            isDeletingCart
-                                ? <CircularProgress size="1rem"/>
-                                : <IconButton color="error" onClick={handleDelete}>
-                                    <DeleteForeverRoundedIcon/>
-                                </IconButton>
-                        }
+                        <IconButton color="error" onClick={() => setIsDeleteConfirm(true)}>
+                            <DeleteForeverRoundedIcon/>
+                        </IconButton>
                     </CardActions>
                 </Card>
             </Paper>
+            <DeleteConfirmDialog isOpen={isDeleteConfirm} setIsOpen={setIsDeleteConfirm} handleDelete={handleDelete}/>
         </Box>
     );
 }

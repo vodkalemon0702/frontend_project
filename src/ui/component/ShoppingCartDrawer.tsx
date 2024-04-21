@@ -8,7 +8,7 @@ import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
 import IconButton from "@mui/material/IconButton";
 import {GetAllCartItemDto} from "../../data/cart/GetAllCartItemDto.ts";
 import * as CartItemApi from "../../api/CartItemApi.ts"
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import LoadingPage from "./LoadingPage.tsx";
 
 type Props = {
@@ -60,11 +60,14 @@ export default function ShoppingCartDrawer({isOpen, setIsOpen}: Props) {
                              mt={4}
                              onClick={toggleDrawer(false)}>
                             {
-                                cartItemDtoList?.map((value) => (
-                                    <Paper elevation={3} key={value.pid}>
-                                        <ShoppingCartDrawerItem dto={value}/>
-                                    </Paper>
-                                ))
+                                cartItemDtoList
+                                    ? cartItemDtoList.map((value) => (
+                                        <Paper elevation={3} key={value.pid}>
+                                            <ShoppingCartDrawerItem dto={value}/>
+                                        </Paper>
+                                    ))
+                                    : <Typography>There is nothing.
+                                        <Link to={"/"}>Go Shopping</Link></Typography>
                             }
                             <Box sx={{
                                 position: 'sticky',
