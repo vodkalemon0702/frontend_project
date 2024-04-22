@@ -1,4 +1,3 @@
-import TopNavBar from "../../component/NavList/TopNavBar.tsx";
 import Box from "@mui/material/Box";
 import {Alert, Button, Divider, Paper, TextField} from "@mui/material";
 import {ChangeEvent, FormEvent, useContext, useEffect, useState} from "react";
@@ -7,6 +6,7 @@ import {useNavigate} from "react-router-dom";
 import {UserData} from "../../../data/user/UserData.ts";
 import {LoginUserContext} from "../../../context/LoginUserContext.ts";
 import {GoogleLoginButton} from "react-social-login-buttons";
+import NavBar from "../../component/NavBar.tsx";
 
 export default function LoginPage() {
     const [email, setEmail] = useState<string>("");
@@ -49,7 +49,7 @@ export default function LoginPage() {
 
     return (
         <>
-            <TopNavBar/>
+            <NavBar/>
             <Box sx={{
                 width: "100%",
                 height: "92vh",

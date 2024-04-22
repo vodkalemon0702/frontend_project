@@ -4,7 +4,6 @@ import Typography from "@mui/material/Typography";
 import CardActions from "@mui/material/CardActions";
 import Card from "@mui/material/Card";
 import {GetAllCartItemDto} from "../../../../data/cart/GetAllCartItemDto.ts";
-import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import QuantitySelector from "../../../component/QuantitySelector.tsx";
 import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded';
@@ -13,6 +12,8 @@ import * as CartItemApi from "../../../../api/CartItemApi.ts";
 import {Dispatch, SetStateAction, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import DeleteConfirmDialog from "./DeleteConfirmDialog.tsx";
+import Container from "@mui/material/Container";
+
 
 type Props = {
     dto: GetAllCartItemDto;
@@ -41,7 +42,7 @@ export default function CartItemDetails({dto, setDtoList, cartItemDtoList}: Prop
     }
 
     const handleMinusOne = async () => {
-        if (dto.cart_quantity -1 > 0) {
+        if (dto.cart_quantity - 1 > 0) {
             setIsQuantityPatching(true)
             const response = await CartItemApi.patchCartItemQuantity(dto.pid, dto.cart_quantity - 1);
             const updatedDtoList = cartItemDtoList.map((value) => {
@@ -52,7 +53,7 @@ export default function CartItemDetails({dto, setDtoList, cartItemDtoList}: Prop
             });
             setDtoList(updatedDtoList);
             setIsQuantityPatching(false)
-        }else {
+        } else {
             setIsDeleteConfirm(true)
         }
     }
@@ -71,37 +72,45 @@ export default function CartItemDetails({dto, setDtoList, cartItemDtoList}: Prop
 
     return (
         <Box>
-            <Paper elevation={0}>
-                <Card sx={{maxWidth: 345}}>
-                    <CardMedia
-                        sx={{height: 140}}
-                        image={dto.image_url}
-                    />
-                    <CardContent>
-                        <Typography gutterBottom variant="h5" component="div">
-                            {dto.name}
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                            {dto.cart_quantity}
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                            {dto.price}
-                        </Typography>
-                    </CardContent>
-                    <CardActions>
-                        <QuantitySelector
-                            quantity={dto.cart_quantity}
-                            handleMinus={handleMinusOne}
-                            handlePlus={handlePlusOne}
-                            isLoading={isQuantityPatching}
-                        />
-                        <IconButton color="error" onClick={() => setIsDeleteConfirm(true)}>
-                            <DeleteForeverRoundedIcon/>
-                        </IconButton>
-                    </CardActions>
-                </Card>
-            </Paper>
-            <DeleteConfirmDialog isOpen={isDeleteConfirm} setIsOpen={setIsDeleteConfirm} handleDelete={handleDelete}/>
+            <Container>
+                    <Card sx={{display: "flex", maxWidth: "100%",my:2}}>
+                            <CardMedia
+                                sx={{width: 140, height: 200}}
+                                image={dto.image_url}
+                            >
+                            </CardMedia>
+
+                        <CardContent
+                            sx={{width: "80%"}}>
+                            <Typography gutterBottom variant="overline" component="div" fontSize={15}>
+                                {dto.name}
+                            </Typography>
+                            <QuantitySelector
+                                quantity={dto.cart_quantity}
+                                handleMinus={handleMinusOne}
+                                handlePlus={handlePlusOne}
+                                isLoading={isQuantityPatching}
+                            />
+                        </CardContent>
+                        <CardActions>
+                            <Typography variant="body2" color="text.secondary">
+                                {`$${(dto.price*dto.cart_quantity).toLocaleString()}`}
+                            </Typography>
+                            <IconButton
+                                sx={{
+                                    "&:hover": {
+                                        color: "inherit"
+                                    }
+                                }}
+                                onClick={() => setIsDeleteConfirm(true)}>
+                                <DeleteForeverRoundedIcon/>
+                            </IconButton>
+                        </CardActions>
+                    </Card>
+                <DeleteConfirmDialog isOpen={isDeleteConfirm} setIsOpen={setIsDeleteConfirm}
+                                     handleDelete={handleDelete}/>
+            </Container>
         </Box>
-    );
+    )
+        ;
 }
