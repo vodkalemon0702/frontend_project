@@ -10,12 +10,12 @@ export default function AddToCartSuccessSnackbar({snackbarOpen, setSnackbarOpen}
     return (
         <>
             <Snackbar
-                anchorOrigin={{vertical: "bottom", horizontal: "right"}}
+                anchorOrigin={{vertical: "bottom", horizontal: "center"}}
                 open={snackbarOpen}
                 autoHideDuration={5000}
                 onClose={() => setSnackbarOpen(false)}>
                 <Alert severity="success">
-                    Success Add To Cart
+                    Item Added To Cart Successfully :)
                 </Alert>
             </Snackbar>
         </>

@@ -17,12 +17,15 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import * as FirebaseAuthService from "../../authService/FirebaseAuthService.ts";
 import {Link} from "react-router-dom";
 import {UserData} from "../../data/user/UserData.ts";
 import {LoginUserContext} from "../../context/LoginUserContext.ts";
 import ShoppingCartDrawer from "./ShoppingCartDrawer.tsx";
+import ShoppingCartTwoToneIcon from '@mui/icons-material/ShoppingCartTwoTone';
+import LogoutTwoToneIcon from '@mui/icons-material/LogoutTwoTone';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faRightToBracket} from "@fortawesome/free-solid-svg-icons";
 
 const drawerWidth = 240;
 const navItems = ['Home'];
@@ -49,28 +52,59 @@ export default function NavBar() {
                             {loginUser.email}
                         </Typography>
                     </Box>
-                    <Button variant="contained"
-                            color="success"
-                            sx={{mr:2}}
-                            onClick={()=>{
-                                setIsOpen(true);
-                            }}>
-                        <ShoppingCartIcon/>
-                    </Button>
+                    <IconButton color="success"
 
-                    <Button color="error" variant="contained"
-                            onClick={() => {
-                                FirebaseAuthService.handleSignOut().then();
-                            }}>Logout</Button>
+                                sx={{
+                                    mr: 2
+                                }}
+                                onClick={() => {
+                                    setIsOpen(true);
+                                }}>
+                        <ShoppingCartTwoToneIcon/>
+                    </IconButton>
+
+                    <IconButton color="error"
+                                onClick={() => {
+                                    FirebaseAuthService.handleSignOut();
+                                }}>
+                        <Box
+                            display="flex"
+                            sx={{
+                            border: "white 2px solid",
+                            padding: "4px",
+                            "&:hover": {
+                                backgroundColor: "lightgrey",
+                            }
+                        }}>
+                            <Typography mr={1} color="white" fontSize={16} fontWeight="bold">
+                                Logout
+                            </Typography>
+                            <LogoutTwoToneIcon/>
+                        </Box>
+                    </IconButton>
                 </Stack>
             )
         } else if (loginUser === null) {
             return (
-                <Button variant="contained" color={"secondary"}>
-                    <Link to={"/login"}>
-                        LOGIN
+
+                <IconButton>
+                    <Link to={"/login"} style={{textDecoration: 'none'}}>
+                        <Box
+                            display="flex"
+                            sx={{
+                                border: "white 2px solid",
+                                padding: "4px",
+                                "&:hover": {
+                                    backgroundColor: "lightgrey",
+                                }
+                            }}>
+                            <Typography mr={1} color="white" fontSize={16} fontWeight="bold">
+                                LOGIN
+                            </Typography>
+                            <FontAwesomeIcon icon={faRightToBracket} fade style={{color: "#0ea074",}}/>
+                        </Box>
                     </Link>
-                </Button>
+                </IconButton>
             )
         } else {
             return (
@@ -84,7 +118,7 @@ export default function NavBar() {
     const drawer = (
         <Box onClick={handleDrawerToggle} sx={{textAlign: 'center'}}>
             <Typography variant="h6" sx={{my: 2}}>
-                MUI
+                Man's e-Shop
             </Typography>
             <Divider/>
             <List>
@@ -98,8 +132,12 @@ export default function NavBar() {
                                             to="/"
                                             sx={{
                                                 width: "100%",
-                                                color: 'inherit',
-                                                backgroundColor: 'inherit'
+                                                color: 'white',
+                                                backgroundColor: 'black',
+                                                fontWeight:"bold",
+                                                "&:hover": {
+                                                    backgroundColor:"ActiveBorder"
+                                                }
                                             }}
                                         >
                                             {item}
@@ -117,7 +155,7 @@ export default function NavBar() {
     return (
         <Box sx={{display: 'flex'}}>
             <CssBaseline/>
-            <AppBar component="nav" sx={{backgroundColor:"lightgrey"}}>
+            <AppBar component="nav" sx={{backgroundColor: "black"}}>
                 <Toolbar>
                     <IconButton
                         color="inherit"
@@ -133,14 +171,19 @@ export default function NavBar() {
                         component="div"
                         sx={{flexGrow: 1, display: {xs: 'none', sm: 'block'}}}
                     >
-                        MUI
+                        Man's e-Shop
                     </Typography>
                     <Box sx={{display: {xs: 'none', sm: 'block'}}}>
                         {navItems.map((item, index) => (
                             <Button key={item}
                                     component={Link}
                                     to={index === 0 ? "/" : ""}
-                                    sx={{color: '#fff'}}>
+                                    sx={{
+                                        color: 'white',
+                                        fontWeight:"bold",
+                                        fontSize:16,
+                                        mr:4
+                            }}>
                                 {item}
                             </Button>
                         ))}

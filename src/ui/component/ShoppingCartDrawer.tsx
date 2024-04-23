@@ -58,7 +58,8 @@ export default function ShoppingCartDrawer({isOpen, setIsOpen}: Props) {
                         <Box sx={{width: 440}}
                              role="presentation"
                              mt={4}
-                             onClick={toggleDrawer(false)}>
+                            // onClick={toggleDrawer(false)}
+                        >
                             {
                                 cartItemDtoList
                                     ? cartItemDtoList.map((value) => (
@@ -115,7 +116,7 @@ export default function ShoppingCartDrawer({isOpen, setIsOpen}: Props) {
                 fetchAllCartItem();
             }}
         >
-            <Box onMouseDown={(e) => e.stopPropagation()}>
+            <Box>
                 {
                     renderCart()
                 }

@@ -13,6 +13,8 @@ type Props = {
     productDetailDto: ProductDetailDto;
 }
 
+const imageBaseUrl = "https://gshock.casio.com/content/casio/locales/jp/ja/brands/gshock/products/"
+
 export default function ProductDetailsContainer({productDetailDto}: Props) {
     const [quantity, setQuantity] = useState<number>(1);
     const navigate = useNavigate();
@@ -79,7 +81,7 @@ export default function ProductDetailsContainer({productDetailDto}: Props) {
         <Box>
             <Box>
                 <img
-                    src={productDetailDto.image_url}
+                    src={`${imageBaseUrl}${productDetailDto.image_url}`}
                     height={700}/>
             </Box>
             <Box>

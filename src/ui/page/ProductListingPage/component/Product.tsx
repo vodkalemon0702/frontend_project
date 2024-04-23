@@ -1,11 +1,8 @@
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
+import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import {Box, CardActionArea, CardActions} from '@mui/material';
+import {Box, CardActionArea, Paper} from '@mui/material';
 import {ProductListDto} from "../../../../data/product/ProductListDto.ts";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCartShopping} from "@fortawesome/free-solid-svg-icons/faCartShopping";
 import {useNavigate} from "react-router-dom";
 import * as CartItemApi from "../../../../api/CartItemApi.ts";
 import IconButton from "@mui/material/IconButton";
@@ -15,6 +12,8 @@ import AddToCartSuccessSnackbar from "../../../component/AddToCartSuccessSnackba
 type Props = {
     productList: ProductListDto;
 }
+const imageBaseUrl = "https://gshock.casio.com/content/casio/locales/jp/ja/brands/gshock/products/"
+
 
 export default function Product({productList}: Props) {
     const navigate = useNavigate();
@@ -33,39 +32,59 @@ export default function Product({productList}: Props) {
     }
 
     return (
-        <Box>
-            <Card sx={{maxWidth: 345}}>
+        <Box mt={8}>
+            <Paper elevation={24} sx={{
+                maxWidth: 345
+            }}>
                 <CardActionArea onClick={() => {
                     navigate(`/product/${productList.pid}`)
                 }}>
                     <CardMedia
                         component="img"
-                        height="140"
-                        image={productList.image_url}
+                        // height="306px"
+                        width="100%"
+                        style={{objectFit: "contain"}}
+                        image={`${imageBaseUrl}${productList.image_url}`}
                     />
-                    <CardContent>
-                        <Typography gutterBottom variant="h5" component="div">
-                            {productList.name}
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                            {
-                                productList.has_stock
-                                    ? `$ ${productList.price.toLocaleString()}`
-                                    : "out of stock"
-                            }
-                        </Typography>
-                    </CardContent>
                 </CardActionArea>
-                <CardActions>
-                    <IconButton
-                        size="small"
-                        color="primary"
-                        onClick={handleAddToCart}
-                        disabled={isAddingCart}>
-                        <FontAwesomeIcon icon={faCartShopping}/>
-                    </IconButton>
-                </CardActions>
-            </Card>
+                    <Box>
+                        <Box display="flex" justifyContent="center">
+                            <Typography gutterBottom variant="subtitle1">
+                                {productList.name}
+                            </Typography>
+                        </Box>
+                        <Box display="flex" justifyContent="space-between" alignItems="center" mx={4} mt={-1}>
+                            <Box>
+                                <Typography variant="body2">
+                                    {
+                                        productList.has_stock
+                                            ? `$ ${productList.price.toLocaleString()}`
+                                            : "out of stock"
+                                    }
+                                </Typography>
+                            </Box>
+                            <Box>
+                                <IconButton
+                                    size="small"
+                                    sx={{color:"black"}}
+                                    onClick={handleAddToCart}
+                                    disabled={isAddingCart}
+                                >
+                                    <ShoppingBagOutlinedIcon/>
+                                </IconButton>
+                            </Box>
+                        </Box>
+                    </Box>
+                {/*<CardActions>*/}
+                {/*    <IconButton*/}
+                {/*        size="small"*/}
+                {/*        color="primary"*/}
+                {/*        onClick={handleAddToCart}*/}
+                {/*        disabled={isAddingCart}>*/}
+                {/*        <FontAwesomeIcon icon={faCartShopping}/>*/}
+                {/*    </IconButton>*/}
+                {/*</CardActions>*/}
+            </Paper>
             <AddToCartSuccessSnackbar snackbarOpen={snackBarOpen} setSnackbarOpen={setSnackBarOpen}/>
         </Box>
     );
