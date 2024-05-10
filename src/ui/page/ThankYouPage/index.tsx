@@ -1,9 +1,10 @@
-import NavBar from "../../component/NavBar.tsx";
+import TopNavBar from "../../component/TopNavBar.tsx";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import {useEffect, useState} from "react";
 import Typography from "@mui/material/Typography";
 import {useNavigate} from "react-router-dom";
+import thankYouIcon from "../../../img/thankYouPageIcon.gif";
 
 export default function ThankYouPage() {
     const [second, setSecond] = useState<number>(5);
@@ -29,15 +30,19 @@ export default function ThankYouPage() {
 
     return (
         <Container>
-            <NavBar/>
-            <Box>
-                <Typography>
-                    back to home page in {second}second
+            <TopNavBar/>
+            <Box display='flex' justifyContent='center' alignItems='center' mb={4} flexDirection='column'>
+                <Typography variant='h3' color='lightgreen'>
+                    Check Out Success!
+                    Love Youuuuu
+                </Typography>
+                <Typography variant='h6'>
+                    Back to home page in {second} second
                 </Typography>
             </Box>
             <Box>
                 <img
-                    src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExd3htZ3lmM2h1eTVwMWw3OHhvOW92NWt5a2V0ajF2c3Fqd3N4cHNwZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3CLLLQCX25HP3gxbyK/giphy.gif"
+                    src={thankYouIcon}
                     width="100%"/>
             </Box>
         </Container>

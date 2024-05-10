@@ -1,4 +1,4 @@
-import NavBar from "../../component/NavBar.tsx";
+import TopNavBar from "../../component/TopNavBar.tsx";
 import {useContext, useEffect, useState} from "react";
 import {GetAllCartItemDto} from "../../../data/cart/GetAllCartItemDto.ts";
 import * as CartItemApi from "../../../api/CartItemApi.ts";
@@ -7,6 +7,7 @@ import CartItemContainer from "./component/CartItemContainer.tsx";
 import LoadingPage from "../../component/LoadingPage.tsx";
 import {LoginUserContext} from "../../../context/LoginUserContext.ts";
 import {UserData} from "../../../data/user/UserData.ts";
+import Footer from "../../component/Footer.tsx";
 
 export default function ShoppingCartPage() {
     const navigate = useNavigate();
@@ -33,12 +34,13 @@ export default function ShoppingCartPage() {
 
     return (
         <>
-            <NavBar/>
+            <TopNavBar/>
             {
                 cartItemDtoList
                     ? <CartItemContainer cartItemDtoList={cartItemDtoList} setDtoList={setCartItemDtoList}/>
                     : <LoadingPage/>
             }
+            <Footer/>
         </>
     )
 }

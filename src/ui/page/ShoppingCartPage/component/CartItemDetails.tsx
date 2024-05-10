@@ -21,6 +21,8 @@ type Props = {
     setDtoList: Dispatch<SetStateAction<GetAllCartItemDto[] | undefined>>
 }
 
+const imageBaseUrl = "https://gshock.casio.com/content/casio/locales/jp/ja/brands/gshock/products/"
+
 export default function CartItemDetails({dto, setDtoList, cartItemDtoList}: Props) {
     const [isQuantityPatching, setIsQuantityPatching] = useState<boolean>(false);
     const navigate = useNavigate();
@@ -76,7 +78,7 @@ export default function CartItemDetails({dto, setDtoList, cartItemDtoList}: Prop
                     <Card sx={{display: "flex", maxWidth: "100%",my:2}}>
                             <CardMedia
                                 sx={{width: 140, height: 200}}
-                                image={dto.image_url}
+                                image={`${imageBaseUrl}${dto.image_url}`}
                             >
                             </CardMedia>
 
@@ -102,12 +104,13 @@ export default function CartItemDetails({dto, setDtoList, cartItemDtoList}: Prop
                                         color: "inherit"
                                     }
                                 }}
-                                onClick={() => setIsDeleteConfirm(true)}>
+                                onClick={handleDelete}>
                                 <DeleteForeverRoundedIcon/>
-                            </IconButton>
+                            </IconButton>·
                         </CardActions>
                     </Card>
-                <DeleteConfirmDialog isOpen={isDeleteConfirm} setIsOpen={setIsDeleteConfirm}
+                <DeleteConfirmDialog
+                    isOpen={isDeleteConfirm} setIsOpen={setIsDeleteConfirm}
                                      handleDelete={handleDelete}/>
             </Container>
         </Box>

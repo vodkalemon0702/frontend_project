@@ -4,8 +4,9 @@ import ProductDetailsContainer from "./component/ProductDetailsContainer.tsx";
 import Container from "@mui/material/Container";
 import * as ProductApi from "../../../api/ProductApi.ts"
 import {useNavigate, useParams} from "react-router-dom";
-import LoadingPage from "../../component/LoadingPage.tsx";
-import NavBar from "../../component/NavBar.tsx";
+import TopNavBar from "../../component/TopNavBar.tsx";
+import Footer from "../../component/Footer.tsx";
+import LoadingGif from "../../component/LoadingGif.tsx";
 
 
 type Params = {
@@ -28,22 +29,24 @@ export default function ProductDetailPage() {
 
     useEffect(() => {
         if (productId) {
+            setProductDetailDto(undefined);
             fetchProductDetailsDto(productId);
         } else {
             navigate("/error")
         }
-    }, [])
+    }, [productId])
 
     return (
         <>
-            <NavBar/>
+            <TopNavBar/>
             <Container>
                 {
                     productDetailDto
                         ? <ProductDetailsContainer productDetailDto={productDetailDto}/>
-                        : <LoadingPage/>
+                        : <LoadingGif/>
                 }
             </Container>
+            <Footer/>
         </>
     )
 }

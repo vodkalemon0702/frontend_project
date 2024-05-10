@@ -1,9 +1,10 @@
 import {CircularProgress, Stack} from "@mui/material";
 import Box from "@mui/material/Box";
-import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
+import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
+import IndeterminateCheckBoxOutlinedIcon from '@mui/icons-material/IndeterminateCheckBoxOutlined';
+
 
 type Props = {
     quantity: number;
@@ -17,10 +18,12 @@ export default function QuantitySelector({quantity, handleMinus, handlePlus, isL
         <Stack direction="row" alignItems="center">
             <Box>
                 <IconButton
-                    color="error"
+                    size="large"
                     onClick={handleMinus}
-                    disabled={isLoading}>
-                    <RemoveCircleOutlineIcon/>
+                    disabled={isLoading}
+                    style={{color: "black"}}>
+                    {/*<RemoveCircleOutlineIcon/>*/}
+                    <IndeterminateCheckBoxOutlinedIcon/>
                 </IconButton>
             </Box>
             <Box>
@@ -32,10 +35,12 @@ export default function QuantitySelector({quantity, handleMinus, handlePlus, isL
             </Box>
             <Box>
                 <IconButton
-                    color="success"
+                    size="large"
                     onClick={handlePlus}
-                    disabled={isLoading}>
-                    <AddCircleOutlineIcon/>
+                    disabled={isLoading}
+                    style={{color: "black"}}>
+                    {/*<AddCircleOutlineIcon/>*/}
+                    <AddBoxOutlinedIcon/>
                 </IconButton>
             </Box>
         </Stack>

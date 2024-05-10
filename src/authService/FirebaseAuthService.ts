@@ -5,7 +5,8 @@ import {
     GoogleAuthProvider,
     onAuthStateChanged,
     signInWithEmailAndPassword,
-    signInWithPopup, signOut
+    signInWithPopup, signOut,
+    createUserWithEmailAndPassword
 } from "firebase/auth";
 import {UserData} from "../data/user/UserData.ts";
 
@@ -25,6 +26,17 @@ export const handleSignInWithEmailAndPassword = async (email: string, password: 
         // Signed in
         return true;
     } catch (error) {
+        console.log(error);
+        return false;
+    }
+}
+
+export const handleCreateUser = async (email: string, password: string): Promise<boolean> => {
+    try {
+        const auth = getAuth();
+        await createUserWithEmailAndPassword(auth, email, password);
+        return true;
+    }catch (error){
         console.log(error);
         return false;
     }

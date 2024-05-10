@@ -1,10 +1,10 @@
-import Box from '@mui/material/Box';
 import MobileStepper from '@mui/material/MobileStepper';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Container from "@mui/material/Container";
 import ChevronLeftRoundedIcon from '@mui/icons-material/ChevronLeftRounded';
 import IconButton from "@mui/material/IconButton";
 import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
+import Box from "@mui/material/Box";
 
 const steps = [
     {
@@ -51,17 +51,40 @@ export default function ProductListingHeader() {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
 
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setActiveStep((prevActiveStep) => (prevActiveStep + 1) % maxSteps);
+        }, 5000);
+        return () => clearInterval(interval);
+    }, [maxSteps]);
+
+
     return (
         <Container>
-            <Box sx={{position: 'relative', display: 'flex', alignItems: 'center'}}>
-                <Box sx={{height: 440, width: '100%', p: 2}}>
-                    <img src={steps[activeStep].imgPath} width="100%" height={440}/>
-                    <Box sx={{position: 'absolute', left: -80, top: '50%', transform: 'translateY(-50%)',margin: '0 20px'}}>
+            <Box
+                sx={{position: 'relative', display: 'flex', alignItems: 'center',
+                width:'auto'}}
+            >
+                <Box
+                    // sx={{height: 440, p: 2}}
+                >
+                    <img src={steps[activeStep].imgPath}
+                        style={{
+                            width:"100%" ,
+                            height:"auto",
+                            display:'block',
+                            maxWidth:'100%',
+                            maxHeight:'100vh'
+                        }}
+                        />
+                    <Box
+                        sx={{position: 'absolute', left: -30, top: '50%', transform: 'translateY(-50%)',margin: '0 20px'}}
+                    >
                         <IconButton onClick={handleBack} disabled={activeStep === 0}>
                             <ChevronLeftRoundedIcon fontSize="large"/>
                         </IconButton>
                     </Box>
-                    <Box sx={{position: 'absolute', right: -80, top: '50%', transform: 'translateY(-50%)',margin: '0 20px'}}>
+                    <Box sx={{position: 'absolute', right: -30, top: '50%', transform: 'translateY(-50%)',margin: '0 20px'}}>
                         <IconButton onClick={handleNext} disabled={activeStep === maxSteps - 1}>
                             <ChevronRightRoundedIcon fontSize="large"/>
                         </IconButton>
@@ -80,36 +103,6 @@ export default function ProductListingHeader() {
                     }}
                 />
             </Box>
-            {/*<MobileStepper*/}
-            {/*    steps={maxSteps}*/}
-            {/*    position="static"*/}
-            {/*    activeStep={activeStep}*/}
-            {/*    nextButton={*/}
-            {/*        <Button*/}
-            {/*            size="medium"*/}
-            {/*            onClick={handleNext}*/}
-            {/*            disabled={activeStep === maxSteps - 1}*/}
-            {/*        >*/}
-            {/*            Next*/}
-            {/*            /!*{theme.direction === 'rtl' ? (*!/*/}
-            {/*            /!*    <KeyboardArrowLeft/>*!/*/}
-            {/*            /!*) : (*!/*/}
-            {/*            /!*    <KeyboardArrowRight/>*!/*/}
-            {/*            /!*)}*!/*/}
-            {/*        </Button>*/}
-            {/*    }*/}
-            {/*    backButton={*/}
-            {/*        <Button size="small" onClick={handleBack} disabled={activeStep === 0}>*/}
-            {/*            /!*{theme.direction === 'rtl' ? (*!/*/}
-            {/*            /!*    <KeyboardArrowRight/>*!/*/}
-            {/*            /!*) : (*!/*/}
-            {/*            /!*    <KeyboardArrowLeft/>*!/*/}
-            {/*            /!*)}*!/*/}
-            {/*            Back*/}
-            {/*        </Button>*/}
-            {/*    }*/}
-            {/*/>*/}
-            {/*</Box>*/}
         </Container>
     )
 }

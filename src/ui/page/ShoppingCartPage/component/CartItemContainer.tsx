@@ -23,12 +23,12 @@ export default function CartItemContainer({cartItemDtoList, setDtoList}: Props) 
     }, 0)
     const [isBackdropOpen, setIsBackdropOpen] = useState<boolean>(false);
 
-    const handlePay=async ()=>{
+    const handlePay = async () => {
         try {
-        setIsBackdropOpen(true);
-        const responseData = await TransactionApi.prepareTransaction();
-        navigate(`/checkout/${responseData.tid}`)
-        }catch (error){
+            setIsBackdropOpen(true);
+            const responseData = await TransactionApi.prepareTransaction();
+            navigate(`/checkout/${responseData.tid}`);
+        } catch (error) {
             navigate("/error");
         }
     }
@@ -46,7 +46,7 @@ export default function CartItemContainer({cartItemDtoList, setDtoList}: Props) 
                         </Typography>
                     </Box>
                     <Button variant="contained" color="success" sx={{width: "100%"}}
-                    onClick={handlePay}>
+                            onClick={handlePay}>
                         Check Out
                     </Button>
                 </Box>

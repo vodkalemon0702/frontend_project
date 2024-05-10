@@ -5,6 +5,11 @@ import {UserData} from "./data/user/UserData.ts";
 import {useEffect, useState} from "react";
 import * as FirebaseAuthService from "./authService/FirebaseAuthService.ts";
 import {LoginUserContext} from "./context/LoginUserContext.ts";
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+
 
 function App() {
     const [loginUser, setLoginUser]

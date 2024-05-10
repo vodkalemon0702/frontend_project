@@ -24,6 +24,7 @@ export default function ProductList({productList}: Props) {
         return productList.slice(startIndex, endIndex);
     };
 
+
     const handlePrevPage = () => {
         setPage((prevPage) => Math.max(prevPage - 1, 1));
     };
@@ -89,12 +90,12 @@ export default function ProductList({productList}: Props) {
                     disabled={page === 1}
                     onClick={handlePrevPage}
                     sx={{
-                        backgroundColor: "black",
-                        color: 'white',
-                        "&:hover": {
-                            backgroundColor: "white",
-                            color: 'black',
-                        }
+                        // backgroundColor: "black",
+                        color: 'black',
+                        // "&:hover": {
+                        //     backgroundColor: "white",
+                        //     color: 'black',
+                        // }
                     }}
                 >
                     <ArrowBackIosNewRoundedIcon fontSize="large"/>
@@ -105,22 +106,46 @@ export default function ProductList({productList}: Props) {
                     disabled={page === totalPages}
                     onClick={handleNextPage}
                     sx={{
-                        backgroundColor: "black",
-                        color: 'white',
-                        "&:hover": {
-                            backgroundColor: "white",
-                            color: 'black',
-                        }
+                        // backgroundColor: "black",
+                        color: 'black',
+                        // "&:hover": {
+                        //     backgroundColor: "white",
+                        //     color: 'black',
+                        // }
                     }}
                 >
                     <ArrowForwardIosRoundedIcon fontSize="large"/>
                 </IconButton>
             </Box>
-            <Grid container spacing={2}>
+            <Grid container
+                sx={{
+                    "&:hover > :not(:hover)":{
+                        opacity: "0.4",
+
+                    },
+                }}
+            >
                 {
                     getCurrentPageProducts().map((value) => (
-                        <Grid item xs={12} sm={6} md={4} key={value.pid}>
-                            <Product productList={value}/>
+                        <Grid item xs={12} sm={6} md={4} mb={4} key={value.pid}
+
+                              sx={{
+                                  transition: "opacity 0.6s ease",
+                                  // "&:hover > :not(:hover)": {
+                                  //     opacity: "0.4",
+                                  // },
+                              }}
+                        >
+                            {/*<Box*/}
+                            {/*    sx={{*/}
+                            {/*        // "&:hover > :not(:hover)": {*/}
+                            {/*        //     opacity: "0.4",*/}
+                            {/*        // }*/}
+                            {/*        transition: "opacity 0.6s ease",*/}
+                            {/*    }}*/}
+                            {/*>*/}
+                                <Product productList={value}/>
+                            {/*</Box>*/}
                         </Grid>
                     ))
                 }
